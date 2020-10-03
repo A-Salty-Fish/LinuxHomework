@@ -34,13 +34,14 @@ void Command::AddArgsStr(string arg)
 char ** Command::GetArgs()
 {
     int argsNum = argsStrVec.size();
-    char **args = (char**) malloc( sizeof(char*) * argsNum );
+    char **args = (char**) malloc( sizeof(char*) * argsNum + 1);
     for (int i = 0; i < argsNum; i++)
     {
         char *arg = new char[argsStrVec[i].length() + 1];
         strcpy(arg, argsStrVec[i].c_str());
         args[i] = arg;
     }
+    args[argsNum] = NULL;
     for (int i = 0; i < argsNum; i++)
     {
         cout << args[i] << endl;
