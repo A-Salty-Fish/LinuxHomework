@@ -64,11 +64,19 @@ void Command::Execute()
 class MyShell{
 public:
     void RunMyShell();
+    // bool IsInputValid(string input);
 };
+
+// bool MyShell::IsInputValid(string input)
+// {
+//     switch()
+//     {
+        
+//     }
+// }
 
 void MyShell::RunMyShell()
 {
-    int rtOfSon;//子进程返回值
     while(true)
     {
         cout << START_SIGNIAL;
