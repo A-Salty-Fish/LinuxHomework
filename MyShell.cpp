@@ -41,6 +41,10 @@ char ** Command::GetArgs()
         strcpy(arg, argsStrVec[i].c_str());
         args[i] = arg;
     }
+    for (int i = 0; i < argsNum; i++)
+    {
+        cout << args[i] << endl;
+    }
     return args;
 }
 
