@@ -7,6 +7,7 @@
 using namespace std;
 
 const string START_SIGNIAL = ">";
+const char * BUSYBOX_PATH = "./busybox-1.32.0/busybox";
 
 class MyShell{
 public:
@@ -21,7 +22,10 @@ public:
             if (fork() == 0)
             {
                 const char * charCommand = command.c_str();
-                execlp(charCommand,charCommand,NULL);
+                char **_argvs = (char**) malloc( sizeof(char*) * 10 );
+                _argvs[0] = (char *) "ls";
+                _argvs[1] = NULL;
+                execv(charCommand,_argvs);
                 perror(charCommand);
                 exit(errno);
             }
