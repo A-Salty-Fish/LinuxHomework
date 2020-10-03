@@ -63,20 +63,27 @@ void Command::Execute()
 
 class MyShell{
 public:
-    string command;
-    void RunMyShell()
-    {
-        int rtOfSon;//子进程返回值
-        while(true)
-        {
-            cout << START_SIGNIAL;
-            cin >> command;
-            Command command;
-            command.AddArgsStr("ls");
-            command.Execute();
-        }
-    }
+    void RunMyShell();
 };
+
+void MyShell::RunMyShell()
+{
+    int rtOfSon;//子进程返回值
+    while(true)
+    {
+        cout << START_SIGNIAL;
+        Command command;
+        string cmd;
+        cin >> cmd;
+        command.AddArgsStr(cmd);
+        while(cin.get() != '\n')
+        {
+            cin >> cmd;
+            command.AddArgsStr(cmd);
+        }
+        command.Execute();
+    }
+}
 
 int main()
 {
