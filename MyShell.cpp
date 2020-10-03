@@ -36,7 +36,9 @@ public:
     }
 };
 
-void main()
+int main()
 {
-
+    MyShell myshell;
+    myshell.RunMyShell();
+    return 0;
 }
