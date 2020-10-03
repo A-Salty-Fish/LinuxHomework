@@ -20,9 +20,8 @@ public:
             cin >> command;
             if (fork() == 0)
             {
-                // char * charCommand = new char(sizeof(char)*(command.length()+1));
                 const char * charCommand = command.c_str();
-                execlp(charCommand,charCommand);
+                execlp(charCommand,charCommand,NULL);
                 perror(charCommand);
                 exit(errno);
             }
