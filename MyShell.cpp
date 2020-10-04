@@ -9,31 +9,26 @@
 
 using namespace std;
 
-const string START_SIGNIAL = "Dzy's Shell:";
-const char * BUSYBOX_PATH = "./busybox-1.32.0/busybox";
+const string START_SIGNIAL = "Dzy's Shell:";//Shell提示符
+const char * BUSYBOX_PATH = "./busybox-1.32.0/busybox";//BusyBox路径
 
-enum ValidInput {
+enum ValidInput {//判断合法输入的枚举
                 EmUndefined, 
                 EmLS, 
                 EmGREP,
                 EmDIFF
                 };
-map<string, ValidInput> mapStringInputs;
+map<string, ValidInput> mapStringInputs;//string到Enum的Map
 
 class Command
 {
 private:
     vector<string> argsStrVec;//命令参数字符串
 public:
-    Command();//构造函数
     void AddArgsStr(string arg);//添加参数字符串
     char ** GetArgs();//生成参数char数组
     void Execute();//执行
 };
-
-Command::Command()
-{
-}
 
 void Command::AddArgsStr(string arg)
 {
