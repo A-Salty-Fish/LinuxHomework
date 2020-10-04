@@ -51,10 +51,6 @@ char ** Command::GetArgs()
         args[i] = arg;
     }
     args[argsNum] = NULL;
-    for (int i = 0; i < argsNum; i++)
-    {
-        cout << args[i] << endl;
-    }
     return args;
 }
 
@@ -120,6 +116,8 @@ void MyShell::RunMyShell()
         cin >> cmd;
         if (IsInputValid(cmd))
             command.AddArgsStr(cmd);
+        else
+            continue;
         while(cin.get() != '\n')
         {
             cin >> cmd;
