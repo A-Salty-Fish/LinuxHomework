@@ -1,15 +1,24 @@
-#include <iostream>
+#include<iostream>
 #include<string>
-#include <unistd.h>
-#include <sys/wait.h>
+#include<unistd.h>
+#include<sys/wait.h>
 #include<errno.h>
 #include<vector>
-#include <cstring>
+#include<cstring>
+#include<map>
 
 using namespace std;
 
-const string START_SIGNIAL = ">";
+const string START_SIGNIAL = "Dzy's Shell:";
 const char * BUSYBOX_PATH = "./busybox-1.32.0/busybox";
+
+enum ValidInput {
+                EmUndefined, 
+                EmLS, 
+                EmGREP,
+                EmDIFF
+                };
+map<string, ValidInput> mapStringInputs;
 
 class Command
 {
@@ -69,26 +78,48 @@ void Command::Execute()
 class MyShell{
 public:
     void RunMyShell();
-    // bool IsInputValid(string input);
+    void InitialMap();
+    bool IsInputValid(string input);
 };
 
-// bool MyShell::IsInputValid(string input)
-// {
-//     switch()
-//     {
-        
-//     }
-// }
+void MyShell::InitialMap()
+{
+    mapStringInputs["ls"] = EmLS;
+    mapStringInputs["grep"] = EmGREP;
+    mapStringInputs["diff"] = EmDIFF;
+}
+
+bool MyShell::IsInputValid(string input)
+{
+    switch(mapStringInputs[input])
+    {
+        case EmLS:
+            cout<<"Running ls"<<endl;
+            break;
+        case EmDIFF:
+            cout<<"Running diff"<<endl;
+            break;
+        case EmGREP:
+            cout<<"Running grep"<<endl;
+            break;
+        default:
+            cout<<"Invalid input"<<endl;
+            return false;
+    }
+    return true;
+}
 
 void MyShell::RunMyShell()
 {
     while(true)
     {
+        InitialMap();
         cout << START_SIGNIAL;
         Command command;
         string cmd;
         cin >> cmd;
-        command.AddArgsStr(cmd);
+        if (IsInputValid(cmd))
+            command.AddArgsStr(cmd);
         while(cin.get() != '\n')
         {
             cin >> cmd;
